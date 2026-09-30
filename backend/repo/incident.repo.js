@@ -23,7 +23,7 @@ async function findIncidentById(id) {
 async function saveIncident(incidentData) {
   const collection = await getCollection();
   const incident = await collection.insertOne(incidentData);
-  return { id: incident.insertedId.toString(), incidentData };
+  return { id: incident.insertedId.toString(), ...incidentData };
 }
 
 async function updateIncident(id, newData) {
@@ -36,14 +36,10 @@ async function updateIncident(id, newData) {
   return updated;
 }
 
-async function deleteIncident(id, newData) {
+async function deleteIncident(id) {
   const collection = await getCollection();
-  const updated = await collection.findOneAndUpdate(
-    { _id: new ObjectId(id) },
-    { $set: newData },
-    { returnDocument: 'after' }
-  );
-  return updated;
+  const deleted = await collection.findOneAndDelete({ _id: new ObjectId(id) });
+  return deleted;
 }
 
 export const incidentsRepo = {

@@ -8,14 +8,24 @@ router.post('/register', async (req, res) => {
   const { email, password } = req.body;
 
   const result = await authService.register(email, password);
-  res.json({ success: true, data: result });
+  res.cookie('token', result.token, {
+    httpOnly: true,
+    sameSite: 'lax',
+  });
+
+  res.json({ success: true, data: result.user });
 });
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   const result = await authService.login(email, password);
-  res.json({ success: true, data: result });
+  res.cookie('token', result.token, {
+    httpOnly: true,
+    sameSite: 'lax',
+  });
+
+  res.json({ success: true, data: result.userData });
 });
 
 router.get('/me', authMiddleware, async (req, res) => {

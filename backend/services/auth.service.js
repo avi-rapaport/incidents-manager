@@ -14,17 +14,18 @@ async function register(email, password) {
     createdAt: new Date(),
   };
 
-  const user = await userRepo.saveUser(newUser);
+  const result = await userRepo.saveUser(newUser);
 
-  const { passwordHash, ...userData } = user;
+  const { _id, passwordHash, ...rest } = result;
+  const user = { id: result.id, ...rest };
 
   const token = generateToken({
-    id: userData.id,
-    email: userData.email,
-    role: userData.role,
+    id: user.id,
+    email: user.email,
+    role: user.role,
   });
 
-  return { userData, token };
+  return { user, token };
 }
 
 async function login(email, password) {
