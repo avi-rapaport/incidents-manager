@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export function useRegister() {
   return useMutation({
@@ -41,8 +41,9 @@ export function useLogin() {
 }
 
 export function useAuthMe() {
-  return useMutation({
-    mutationFn: async () => {
+  return useQuery({
+    queryKey: ['auth-me'],
+    queryFn: async () => {
       const res = await fetch('http://localhost:3000/auth/me', {
         credentials: 'include',
       });

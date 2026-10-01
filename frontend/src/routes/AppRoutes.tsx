@@ -3,6 +3,7 @@ import RegisterPage from '../pages/RegisterPage';
 import LoginPage from '../pages/LoginPage';
 import ProtectedRoutes from './ProtectedRoutes';
 import NotFoundPage from '../pages/NotFoundPage';
+import IncidentsMapPage from '../pages/IncidentsMapPage';
 
 const AppRoutes = () => {
   return (
@@ -11,7 +12,9 @@ const AppRoutes = () => {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
 
-      <Route element={<ProtectedRoutes />}></Route>
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/incidents" element={<IncidentsMapPage />} />
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
