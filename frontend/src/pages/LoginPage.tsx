@@ -41,7 +41,7 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
 
       <h4>Don't have an account?</h4>
