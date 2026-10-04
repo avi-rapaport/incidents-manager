@@ -4,6 +4,13 @@ import { validateSchema, userSchema } from '../utils/validation.js';
 import { generateToken } from '../utils/generateToken.js';
 
 async function register(email, password) {
+  const isEmailExists = await userRepo.getUserByEmail(email);
+  if (isEmailExists) {
+    const error = new Error('Email is not unique');
+    error.status = 409;
+    throw error;
+  }
+
   validateSchema(userSchema, { email, password });
 
   const hashedPassword = await bcrypt.hash(password, 12);

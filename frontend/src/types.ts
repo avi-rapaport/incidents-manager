@@ -9,7 +9,13 @@ export interface CreateIncidentBody {
   location: { lat: number; lng: number };
 }
 
-export type UpdateIncidentBody = Partial<CreateIncidentBody>;
+export type UpdateIncidentBody = {
+  title: string;
+  description: string;
+  category: Category;
+  location: { lat: number; lng: number };
+  status: Status;
+};
 
 export interface Incident {
   id: string;
