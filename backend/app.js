@@ -16,7 +16,12 @@ const httpServer = http.createServer(app);
 initIo(httpServer);
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: process.env.CLIENT_ORIGIN }));
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.CLIENT_ORIGIN,
+  })
+);
 app.use(cookieParser());
 app.use(helmet());
 

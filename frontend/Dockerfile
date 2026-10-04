@@ -8,4 +8,4 @@ RUN npm i
 
 COPY . .
 
-CMD [ "node", "--watch", "app.js" ]
+CMD [ "npm", "run", "dev", "--", "--host"]

@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: ./backend
+    container_name: incidents-backend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./backend:/app
+      - backend_modules:/app/node_modules
+
+  frontend:
+    build: ./frontend
+    container_name: incidents-frontend
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./frontend:/app
+      - 'frontend_modules:/app/node_modules'
+    depends_on:
+      - backend
+
+volumes:
+  backend_modules:
+  frontend_modules:
